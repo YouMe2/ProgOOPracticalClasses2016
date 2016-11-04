@@ -9,7 +9,7 @@ public class TestMain extends GraphicsProgram{
 	@Override
 	public void run() {
 		
-		add(new GLabel("hello,  wolrd!", 20, 30));
+		add(new GLabel("hello,  world!", 20, 30));
 	}
 
 }
