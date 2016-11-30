@@ -1,5 +1,9 @@
 package s5;
 
+/**
+ * @author Yannik Eikmeier
+ *
+ */
 public class ComplexNumber {
 
 	private double re;
