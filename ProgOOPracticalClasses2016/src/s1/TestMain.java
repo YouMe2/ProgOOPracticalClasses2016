@@ -1,4 +1,4 @@
-package series1;
+package s1;
 
 import acm.graphics.GLabel;
 import acm.program.ConsoleProgram;
