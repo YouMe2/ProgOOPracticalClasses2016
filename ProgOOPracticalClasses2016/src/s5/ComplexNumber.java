@@ -13,8 +13,6 @@ public class ComplexNumber {
 	
 	public ComplexNumber(ComplexNumber cn){
 		this(cn.getReal(), cn.getImaginary());
-		
-		//ztd
 	}
 	
 	public ComplexNumber(){
