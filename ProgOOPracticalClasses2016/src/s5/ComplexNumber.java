@@ -9,47 +9,41 @@ public class ComplexNumber {
 	private double re;
 
 	private double im;
-	
-	
-	public ComplexNumber(ComplexNumber cn){
+
+	public ComplexNumber(ComplexNumber cn) {
 		this(cn.getReal(), cn.getImaginary());
 	}
-	
-	public ComplexNumber(){
+
+	public ComplexNumber() {
 		this(0.0, 0.0);
 	}
-	
-	public ComplexNumber(double real, double imaginary){
+
+	public ComplexNumber(double real, double imaginary) {
 		re = real;
 		im = imaginary;
 	}
-	
-	
-	
-	public ComplexNumber conjugate(){
+
+	public ComplexNumber conjugate() {
 		this.im = -(this.im);
 		return this;
 	}
-	
-	public ComplexNumber add(ComplexNumber other) {
-		return new ComplexNumber(this.getReal() + other.getReal(), this.getImaginary() +other.getImaginary());
 
+	public ComplexNumber add(ComplexNumber other) {
+		return new ComplexNumber(this.getReal() + other.getReal(), this.getImaginary() + other.getImaginary());
+	}
+
+	public ComplexNumber subtract(ComplexNumber other) {
+		return new ComplexNumber(this.getReal() - other.getReal(), this.getImaginary() - other.getImaginary());
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+	//TODO bla
+
 	public double getReal() {
 		return re;
 	}
 
 	public double getImaginary() {
-		return im;	
+		return im;
 	}
-	
-	
+
 }
