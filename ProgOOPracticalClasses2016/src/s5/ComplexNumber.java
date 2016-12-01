@@ -66,7 +66,7 @@ public class ComplexNumber {
 	 *            The {@link ComplexNumber} to be cloned.
 	 */
 	public ComplexNumber(ComplexNumber cn) {
-		this(cn.real, cn.imaginary);
+		this(cn, false);
 	}
 
 	/**
@@ -94,25 +94,32 @@ public class ComplexNumber {
 		this.squareAbsValue = sqAbs();
 		this.absValue = this.abs();
 		this.conjugate = new ComplexNumber(this, true);
+
 	}
 
-	
 	/**
-	 * Constructs a new {@link ComplexNumber} that is the conjugate of the given
-	 * {@link ComplexNumber}. The given boolean has to effect!
+	 * Constructs a new {@link ComplexNumber}. If {@code conjugate} is true the
+	 * {@link ComplexNumber cn}'s conjugate will be created else cn will be
+	 * cloned.
 	 * 
 	 * @param cn
-	 *            The {@link ComplexNumber} to be conjugated
-	 * @param dontCare
-	 *            this boolean has no effect
+	 *            The {@link ComplexNumber} to be conjugated or cloned
+	 * @param conjugate
+	 *            The boolean that determines whether to conjugate cn or don't
 	 */
-	private ComplexNumber(ComplexNumber cn, boolean dontCare) {
+	public ComplexNumber(ComplexNumber cn, boolean conjugate) {
 		re = this.real = cn.real;
-		im = this.imaginary = -cn.imaginary;
+		if (conjugate)
+			im = this.imaginary = -cn.imaginary;
+		else
+			im = this.imaginary = cn.imaginary;
 
 		this.squareAbsValue = sqAbs();
 		this.absValue = this.abs();
-		this.conjugate = cn;
+		if (conjugate)
+			this.conjugate = cn;
+		else
+			this.conjugate = cn.conjugate;
 	}
 
 	/**
