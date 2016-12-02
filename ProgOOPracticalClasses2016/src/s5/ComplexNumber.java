@@ -4,13 +4,11 @@ package s5;
  * The class ComplexNumber provides a representation of ComplexNumbers
  * consisting of a real and an imaginary part.
  * 
- * @see #real
- * @see #imaginary
+ * 
  * 
  * @see #ComplexNumber()
  * @see #ComplexNumber(ComplexNumber)
  * @see #ComplexNumber(double, double)
- * @see #ComplexNumber(ComplexNumber, boolean)
  * 
  * @author Yannik Eikmeier
  * @since 1.12.2016
@@ -18,45 +16,15 @@ package s5;
  */
 public class ComplexNumber {
 
-	// these are just here because the assignment asked for them
+	/**
+	 * The real part of the {@link ComplexNumber}
+	 */
 	private double re;
+
+	/**
+	 * The imaginary part of the {@link ComplexNumber}
+	 */
 	private double im;
-	//
-
-	/**
-	 * The real part of the {@link ComplexNumber}.
-	 * 
-	 * @see #getReal()
-	 */
-	public final double real;
-
-	/**
-	 * The imaginary part of the {@link ComplexNumber}.
-	 * 
-	 * @see #getImaginary()
-	 */
-	public final double imaginary;
-
-	/**
-	 * The absolute value of the {@link ComplexNumber}.
-	 * 
-	 * @see #abs()
-	 */
-	public final double absValue;
-
-	/**
-	 * The square of the absolute Value of the {@link ComplexNumber}.
-	 * 
-	 * @see #sqAbs()
-	 */
-	public final double squareAbsValue;
-
-	/**
-	 * The conjuagte of the {@link ComplexNumber}.
-	 * 
-	 * @see #conjugate()
-	 */
-	public final ComplexNumber conjugate;
 
 	/**
 	 * Constructs a new {@link ComplexNumber} instance that is an exact clone of
@@ -66,7 +34,7 @@ public class ComplexNumber {
 	 *            The {@link ComplexNumber} to be cloned.
 	 */
 	public ComplexNumber(ComplexNumber cn) {
-		this(cn, false);
+		this(cn.getReal(), cn.getImaginary());
 	}
 
 	/**
@@ -88,38 +56,8 @@ public class ComplexNumber {
 	 */
 	public ComplexNumber(double real, double imaginary) {
 
-		re = this.real = real;
-		im = this.imaginary = imaginary;
-
-		this.squareAbsValue = sqAbs();
-		this.absValue = this.abs();
-		this.conjugate = new ComplexNumber(this, true);
-
-	}
-
-	/**
-	 * Constructs a new {@link ComplexNumber}. If {@code conjugate} is true the
-	 * {@link ComplexNumber cn}'s conjugate will be created else cn will be
-	 * cloned.
-	 * 
-	 * @param cn
-	 *            The {@link ComplexNumber} to be conjugated or cloned
-	 * @param conjugate
-	 *            The boolean that determines whether to conjugate cn or don't
-	 */
-	public ComplexNumber(ComplexNumber cn, boolean conjugate) {
-		re = this.real = cn.real;
-		if (conjugate)
-			im = this.imaginary = -cn.imaginary;
-		else
-			im = this.imaginary = cn.imaginary;
-
-		this.squareAbsValue = sqAbs();
-		this.absValue = this.abs();
-		if (conjugate)
-			this.conjugate = cn;
-		else
-			this.conjugate = cn.conjugate;
+		re = real;
+		im = imaginary;
 	}
 
 	/**
@@ -131,7 +69,7 @@ public class ComplexNumber {
 	 * @return The conjugate of the current {@link ComplexNumber}
 	 */
 	public ComplexNumber conjugate() {
-		return conjugate;
+		return new ComplexNumber(getReal(), -getImaginary());
 	}
 
 	/**
@@ -143,7 +81,7 @@ public class ComplexNumber {
 	 * @return The sum of the two
 	 */
 	public ComplexNumber add(ComplexNumber other) {
-		return new ComplexNumber(this.real + other.real, this.imaginary + other.imaginary);
+		return new ComplexNumber(getReal() + other.getReal(), this.getImaginary() + other.getImaginary());
 	}
 
 	/**
@@ -155,7 +93,7 @@ public class ComplexNumber {
 	 * @return The difference of the two
 	 */
 	public ComplexNumber subtract(ComplexNumber other) {
-		return new ComplexNumber(this.real - other.real, this.imaginary - other.imaginary);
+		return new ComplexNumber(getReal() - other.getReal(), this.getImaginary() - other.getImaginary());
 	}
 
 	/**
@@ -167,8 +105,8 @@ public class ComplexNumber {
 	 * @return The product of the two
 	 */
 	public ComplexNumber multiply(ComplexNumber other) {
-		double real = this.real * other.real - this.imaginary * other.imaginary;
-		double imag = this.real * other.imaginary + this.imaginary * other.real;
+		double real = getReal() * other.getReal() - this.getImaginary() * other.getImaginary();
+		double imag = getReal() * other.getImaginary() + this.getImaginary() * other.getReal();
 		return new ComplexNumber(real, imag);
 	}
 
@@ -195,7 +133,7 @@ public class ComplexNumber {
 	 * @return The result of the two
 	 */
 	public ComplexNumber divide(ComplexNumber other) {
-		return this.multiply(other.conjugate).divide(other.squareAbsValue);
+		return this.multiply(other.conjugate()).divide(other.sqAbs());
 
 	}
 
@@ -213,7 +151,7 @@ public class ComplexNumber {
 		if (d == 0)
 			return null;
 
-		return new ComplexNumber(this.real / d, this.imaginary / d);
+		return new ComplexNumber(getReal() / d, this.getImaginary() / d);
 	}
 
 	/**
@@ -224,7 +162,7 @@ public class ComplexNumber {
 	 * @return the absolute value
 	 */
 	public double abs() {
-		return Math.sqrt(squareAbsValue);
+		return Math.sqrt(sqAbs());
 	}
 
 	/**
@@ -236,7 +174,7 @@ public class ComplexNumber {
 	 * @return The square of the absolute value
 	 */
 	public double sqAbs() {
-		return this.real * this.real + this.imaginary * this.imaginary;
+		return getReal() * getReal() + this.getImaginary() * this.getImaginary();
 	}
 
 	/**
@@ -247,7 +185,7 @@ public class ComplexNumber {
 	 * @return the real part of the current {@link ComplexNumber}
 	 */
 	public double getReal() {
-		return real;
+		return re;
 	}
 
 	/**
@@ -258,7 +196,7 @@ public class ComplexNumber {
 	 * @return the imaginary part of the current {@link ComplexNumber}
 	 */
 	public double getImaginary() {
-		return imaginary;
+		return im;
 	}
 
 	/**
@@ -270,7 +208,7 @@ public class ComplexNumber {
 	@Override
 	public String toString() {
 
-		return this.real + " + " + this.imaginary + "i";
+		return getReal() + " + " + this.getImaginary() + "i";
 	}
 
 }
