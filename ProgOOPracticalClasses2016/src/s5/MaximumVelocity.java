@@ -54,6 +54,13 @@ public class MaximumVelocity extends ConsoleProgram {
 	}
 }
 
+/**
+ * This class represents a basic template for all vehicles in this class
+ * hierarchy to calculate their theoretical maximum velocity.
+ * 
+ * @author Yannik
+ *
+ */
 abstract class Vehicle {
 
 	private double power_P;
@@ -61,6 +68,19 @@ abstract class Vehicle {
 	private double density_p;
 	private double drag_cw;
 
+	/**
+	 * Constructs a new vehicle with the given parameters.
+	 * 
+	 * @param P
+	 *            The Power of the vehicle in Watts
+	 * @param A
+	 *            The front surface of the vehicle in m²
+	 * @param p
+	 *            The density of what ever the vehicle moves throw, eg air in
+	 *            kg/m³
+	 * @param cw
+	 *            The drag coefficient
+	 */
 	public Vehicle(double P, double A, double p, double cw) {
 		this.power_P = P;
 		this.frontSurface_A = A;
@@ -69,19 +89,46 @@ abstract class Vehicle {
 
 	}
 
+	/**
+	 * Returns the theoretical maximum velocity of the vehicle.
+	 * 
+	 * @return The theoretical max velocity in km/h
+	 */
 	public double getMaxVelocity() {
 		return Math.cbrt(2 * power_P / (density_p * frontSurface_A * drag_cw)) * 3.6;
 	}
 
 }
 
+/**
+ * This class represents a basic template for all ship-like vehicles in this
+ * class hierarchy to calculate their theoretical maximum velocity.
+ * 
+ * @author Yannik
+ *
+ */
 abstract class ShipVehicle extends Vehicle {
 
+	/**
+	 * Constructs a new hip-type vehicle with the given power and front surface.
+	 *
+	 * @param P
+	 *            The Power of the vehicle in Watts
+	 * @param A
+	 *            The front surface of the vehicle in m²
+	 */
 	public ShipVehicle(double P, double A) {
 		super(P, A, 1028, 0.3);
 
 	}
 
+	/**
+	 * Returns the theoretical maximum velocity of the vehicle.
+	 * 
+	 * @param knots
+	 *            Determines whether the return value is in knots or in km/h.
+	 * @return The theoretical max velocity
+	 */
 	public double getMaxVelocity(boolean knots) {
 		if (knots)
 			return getMaxVelocity() / 1.85;
@@ -89,32 +136,85 @@ abstract class ShipVehicle extends Vehicle {
 	}
 }
 
+/**
+ * This class represents the vehicle type car and can be used to calculate the
+ * theoretical maximum velocity of a car.
+ * 
+ * @author Yannik
+ *
+ */
 class Car extends Vehicle {
 
+	/**
+	 * Constructs a new car vehicle with the given engine power.
+	 * 
+	 * @param HP
+	 *            The engine power in horsepower
+	 */
 	public Car(double HP) {
 		super(HP * 735.49875, 2.5, 1.3, 0.35);
 	}
 
 }
 
+/**
+ * This class represents the vehicle type steamship and can be used to calculate
+ * the theoretical maximum velocity of a steamship.
+ * 
+ * @author Yannik
+ *
+ */
 class SteamShip extends ShipVehicle {
 
+	/**
+	 * Constructs a new steamship vehicle with the given parameters.
+	 * 
+	 * @param HP
+	 *            The engine power in horsepower
+	 * @param V
+	 *            The displacement tonnage of the ship in m³
+	 * @param l
+	 *            The length of the ship in m
+	 */
 	public SteamShip(double HP, double V, double l) {
 		super(HP * 735.49875, V / l);
 	}
 
 }
 
+/**
+ * This class represents the vehicle type rowing boat and can be used to
+ * calculate the theoretical maximum velocity of a rowing boat.
+ * 
+ * @author Yannik
+ *
+ */
 class RowingBoat extends ShipVehicle {
 
+	/**
+	 * Constructs a new rowing boat vehicle wit the given parameters.
+	 * 
+	 * @param n
+	 *            The number of rowers
+	 * @param b
+	 *            The width of the ship in m
+	 * @param h
+	 *            The draught of the ship in m
+	 */
 	public RowingBoat(int n, double b, double h) {
 		super(n * 100, 0.5 * b * h);
 	}
 
 }
 
+/**
+ * This class represents the vehicle type bicycle and can be used to
+ * calculate the theoretical maximum velocity of a bicycle.
+ * 
+ * @author Yannik
+ *
+ */
 class Bicycle extends Vehicle {
-
 	private double a;
 	private double b;
 	private double cdA;
@@ -124,9 +224,18 @@ class Bicycle extends Vehicle {
 	public static final int TYPE_HANDS_ON_THE_DROPS = 1;
 	public static final int TYPE_ROADSTER = 2;
 
-	public Bicycle(int type) {
+	/**
+	 * Constructs a new Bicycle of the given type.
+	 * 
+	 * @see #TYPE_HANDS_ON_THE_DROPS
+	 * @see #TYPE_HANDS_ON_THE_TOPS
+	 * @see #TYPE_ROADSTER
+	 * 
+	 * @param type The type of the bike to be constructed
+	 */
+	public Bicycle(int type) throws IllegalArgumentException{
 		super(0, 0, 0, 0);
-		
+
 		p = 1.2;
 
 		switch (type) {
@@ -149,9 +258,9 @@ class Bicycle extends Vehicle {
 			break;
 
 		default:
-			break;
+			throw new IllegalArgumentException("Illegal type argument: " + type);
 		}
-		
+
 	}
 
 	@Override
@@ -165,4 +274,3 @@ class Bicycle extends Vehicle {
 	}
 
 }
-
