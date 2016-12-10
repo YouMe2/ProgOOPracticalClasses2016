@@ -1,4 +1,4 @@
-package s2;
+package programming.set2;
 
 import acm.graphics.GLine;
 import acm.program.GraphicsProgram;

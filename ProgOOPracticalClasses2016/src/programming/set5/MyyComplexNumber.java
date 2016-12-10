@@ -1,4 +1,4 @@
-package s5;
+package programming.set5;
 
 /**
  * The class ComplexNumber provides a representation of ComplexNumbers

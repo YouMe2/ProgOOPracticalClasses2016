@@ -1,4 +1,4 @@
-package s4;
+package programming.set4;
 
 import java.awt.Color;
 

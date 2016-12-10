@@ -1,4 +1,4 @@
-package s3;
+package programming.set3;
 
 import acm.program.ConsoleProgram;
 

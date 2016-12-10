@@ -1,4 +1,4 @@
-package s5;
+package programming.set5;
 
 import java.util.prefs.BackingStoreException;
 
