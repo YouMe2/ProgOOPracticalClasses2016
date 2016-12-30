@@ -193,34 +193,3 @@ public class Sudoku extends NumberBoard {
 	}
 
 }
-
-/*
- * 
- * - Array
- * 		Arrays are homogeneous and ordered "sets" or "lists" of Elements.
- * 		Their length can not be changed after initialization.
- * 
- * NO appearances of: 
- * 
- * - ArrayList or any other List-Type 
- * 		Lists are (same as Arrays) homogeneous and ordered but can adjust
- * 		there size in order to store a changing number of Elements.
- * 
- * - Exceptions
- * 		Exceptions are "error messages" or events that can disrupt the
- * 		normal flow of a program.
- * 
- * - The keyword "throw"
- * 		"throw" is used to indicate that an Exception occured and specifies
- * 		which Exception to throw.
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- */
