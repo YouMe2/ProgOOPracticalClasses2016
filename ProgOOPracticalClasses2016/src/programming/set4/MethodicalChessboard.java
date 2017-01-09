@@ -43,6 +43,7 @@ public class MethodicalChessboard extends GraphicsProgram {
 
 		drawChessboard();
 
+		
 		// PLAYER BLACK
 		drawPiece(0, 0, CHESS_PIECE_ROOK, PLAYER_BLACK);
 		drawPiece(1, 0, CHESS_PIECE_KNIGHT, PLAYER_BLACK);
