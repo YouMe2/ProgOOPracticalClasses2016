@@ -1,6 +1,7 @@
 package programming.set11.patchwork;
 
 import java.awt.Color;
+
 import acm.graphics.GArc;
 import acm.graphics.GCompound;
 import acm.graphics.GLine;
